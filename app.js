@@ -1,3 +1,25 @@
+// Toggle for What is Planned Pooling
+const toggleInfoButton = document.getElementById("toggle-info-btn");
+const infoContent = document.getElementById("info-content");
+
+toggleInfoButton.addEventListener("click", () => {
+    const isExpanded = toggleInfoButton.getAttribute("aria-expanded") === "true";
+    toggleInfoButton.setAttribute("aria-expanded", !isExpanded);
+    infoContent.style.display = isExpanded ? "none" : "block";
+    toggleInfoButton.textContent = isExpanded ? "Learn More" : "Show Less";
+});
+
+// Toggle for How to Use This App
+const toggleInstructionsButton = document.getElementById("toggle-instructions-btn");
+const instructionsContent = document.getElementById("instructions-content");
+
+toggleInstructionsButton.addEventListener("click", () => {
+    const isExpanded = toggleInstructionsButton.getAttribute("aria-expanded") === "true";
+    toggleInstructionsButton.setAttribute("aria-expanded", !isExpanded);
+    instructionsContent.style.display = isExpanded ? "none" : "block";
+    toggleInstructionsButton.textContent = isExpanded ? "Learn More" : "Show Less";
+});
+
 document.getElementById('add-color-btn').addEventListener('click', function() {
     const colorInputsDiv = document.getElementById('color-inputs');
 

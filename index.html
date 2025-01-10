@@ -14,22 +14,43 @@
             <!-- Logo will be added here later -->
         </div>
     </header>
-    <section id="instructions">
-        <h2>What is Planned Pooling?</h2>
-        <p>Planned pooling is a crochet technique that transforms variegated yarn into stunning, intentional patterns. Variegated yarn alternates between different colors in repeating sequences, and by carefully aligning the number of stitches with the yarn's color changes, crocheters can create visually striking designs like argyle, stripes, or geometric motifs.
-            <br><br>
-
-            This technique involves:
-            
-            <ul>
-                <li>Choosing the right yarn: Variegated yarn with consistent color repeats works best.</li>
-                <li>Stitch math: Calculating the number of stitches per color segment to achieve the desired pattern.</li>
-                <li>Precision and patience: Adjusting tension and stitch placement to keep the colors pooling predictably.</li>
-                <li>The result is a mesmerizing fabric that looks intricate but is achievable with basic crochet skills and a little planning.</li>
-            </ul>
-        This app allows you to experiment with planned pooling by generating a live grid based on your color and stitch inputs. Have fun exploring different combinations and creating your own unique patterns!
-        </p>
-    </section>
+    <div id="info-sections" style="display: flex; gap: 20px;">
+        <!-- Left Section: What is Planned Pooling -->
+        <section id="instructions" style="flex: 1;">
+            <h2>What is Planned Pooling?</h2>
+            <button id="toggle-info-btn" aria-expanded="false">Learn More</button>
+            <div id="info-content" style="display: none;">
+                <p>Planned pooling is a crochet technique that transforms variegated yarn into stunning, intentional patterns. Variegated yarn alternates between different colors in repeating sequences, and by carefully aligning the number of stitches with the yarn's color changes, crocheters can create visually striking designs like argyle, stripes, or geometric motifs.</p>
+                <br>
+                <p>This technique involves:</p>
+                <ul>
+                    <li>Choosing the right yarn: Variegated yarn with consistent color repeats works best.</li>
+                    <li>Stitch math: Calculating the number of stitches per color segment to achieve the desired pattern.</li>
+                    <li>Precision and patience: Adjusting tension and stitch placement to keep the colors pooling predictably.</li>
+                </ul>
+                <p>The result is a mesmerizing fabric that looks intricate but is achievable with basic crochet skills and a little planning.</p>
+                <p>This app allows you to experiment with planned pooling by generating a live grid based on your color and stitch inputs. Have fun exploring different combinations and creating your own unique patterns!</p>
+            </div>
+        </section>
+    
+        <!-- Right Section: How to Use This App -->
+        <section id="how-to-use" style="flex: 1;">
+            <h2>How to Use This App</h2>
+            <button id="toggle-instructions-btn" aria-expanded="false">Learn More</button>
+            <div id="instructions-content" style="display: none;">
+                <ol>
+                    <li>Check your yarn is suitable, by first making a note of the colour repeat.  Make sure the colour repeat is the same through the yarn and the size each colour change is the same in each repeat.</li>
+                    <li>Choose a suitable hook size for the weight of your yarn and use the swatch calculator to input your swatch gauge.</li>
+                    <li>Decide how many stitches across you would roughly like your blanket to be.  The calculator will give you a guide on how wide the blanket will end up.</li>
+                    <li>Use the Add Color button to add the colors in your yarn - be sure to add them in the correct order!</li>
+                    <li>Chain a length of your yarn, 30 to 35 chains should be enough and make single crochets all along the chain.  Count how many single crochets you get for each color and add that to the number of stitches next to the color.</li>
+                    <li>Use the up and down arrow on the number of stitches in a row to adjust the number of stitches.  Note how the pattern changes.</li>
+                    <li>Once you are happy with your pattern, save your design by clicking on the Save button to export the grid data to an Excel spreadsheet.</li>
+                </ol>
+                <p>Follow these steps and have fun creating unique crochet patterns!</p>
+            </div>
+        </section>
+    </div>
     <div id="container">
         <div id="controls">
             <div id="swatch-calculator">
