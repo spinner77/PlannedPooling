@@ -50,9 +50,9 @@
   .grid-square {
       max-width: 10px; /* Smaller square size for smaller screens */
       max-height: 10px;
-    }
   }
-  
+}
+
 .color-input-group {
   display: flex;
   align-items: center;
@@ -70,4 +70,4 @@
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
-}  
+}
