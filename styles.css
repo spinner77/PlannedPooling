@@ -36,7 +36,7 @@ h1 {
 
 /* Instructions */
 #instructions {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 2rem auto;
     padding: 2rem;
     background-color: white;
@@ -46,12 +46,17 @@ h1 {
 
 /* Layout */
 #container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 2rem;
+    display: flex;
+    flex-direction: column;
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
+}
+
+#main-content {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
 }
 
 /* Controls */
@@ -175,7 +180,7 @@ h1 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    #container {
+    #main-content {
         grid-template-columns: 1fr;
     }
 
