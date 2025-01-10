@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planned Pooling</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
     <header>
@@ -43,10 +44,12 @@
         </aside>
         <main id="live-grid">
             <h2>Live Grid</h2>
-            <div id="grid">
-                <!-- The live grid will be generated here -->
+            <div id="grid-container">
+                <div id="grid">
+                    <!-- The live grid will be generated here -->
+                </div>
             </div>
-            
+            <button id="save-grid-btn" title="Click to save the grid as an image">Save Grid</button>
         </main>
     </div>
     <footer>

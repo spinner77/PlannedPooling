@@ -38,6 +38,28 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
 
 document.getElementById('stitches-across-input').addEventListener('input', generateGrid);
 
+document.getElementById('save-grid-btn').addEventListener('click', function() {
+    const gridElement = document.getElementById('grid');
+    
+    html2canvas(gridElement, {
+        backgroundColor: null,
+        scale: 2, // Increase quality
+    }).then(canvas => {
+        // Create temporary link element
+        const link = document.createElement('a');
+        link.download = 'planned-pooling-grid.png';
+        
+        // Convert canvas to blob
+        canvas.toBlob(function(blob) {
+            link.href = URL.createObjectURL(blob);
+            link.click(); // Trigger download
+            
+            // Cleanup
+            URL.revokeObjectURL(link.href);
+        }, 'image/png');
+    });
+});
+
 function generateGrid() {
     const gridContainer = document.getElementById('grid');
     gridContainer.innerHTML = ''; // Clear existing grid
