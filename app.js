@@ -36,6 +36,31 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
     colorInputsDiv.appendChild(newColorDiv);
 });
 
+document.getElementById("calculate-width").addEventListener("click", function () {
+    // Get input values
+    const swatchWidth = parseFloat(document.getElementById("swatch-width").value);
+    const stitchesPerRow = parseInt(document.getElementById("stitches-across-input").value);
+
+    // Validate inputs
+    if (isNaN(swatchWidth) || swatchWidth <= 0) {
+        alert("Please enter a valid positive number for the swatch width.");
+        return;
+    }
+    if (isNaN(stitchesPerRow) || stitchesPerRow <= 0) {
+        alert("Please enter a valid number of stitches in the row in the Color Picker section.");
+        return;
+    }
+
+    // Calculate the final blanket width
+    const singleStitchWidth = swatchWidth / 10; // Width of a single stitch
+    const blanketWidth = singleStitchWidth * stitchesPerRow; // Final blanket width in mm
+    const blanketWidthCm = (blanketWidth / 10).toFixed(2); // Convert to cm
+
+    // Display the result
+    document.getElementById("blanket-width").textContent = blanketWidth.toFixed(2);
+    document.getElementById("blanket-width-cm").textContent = blanketWidthCm;
+});
+
 document.getElementById('stitches-across-input').addEventListener('input', generateGrid);
 
 document.getElementById('save-grid-btn').addEventListener('click', function() {
