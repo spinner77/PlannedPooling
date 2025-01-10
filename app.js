@@ -10,6 +10,7 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
     colorPicker.type = 'color';
     colorPicker.name = 'color';
     colorPicker.classList.add('color-picker');
+    colorPicker.title = 'Select a color';
 
     // Create the number of stitches input
     const stitchesInput = document.createElement('input');
@@ -17,6 +18,7 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
     stitchesInput.name = 'stitches';
     stitchesInput.placeholder = 'Number of stitches';
     stitchesInput.classList.add('stitches-input');
+    stitchesInput.title = 'Enter the number of stitches for this color';
 
     // Append the inputs to the new div
     newColorDiv.appendChild(colorPicker);

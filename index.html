@@ -32,9 +32,13 @@
     <div id="container">
         <aside id="controls">
             <h2>Controls</h2>
-            <button id="add-color-btn">Add Color</button>
+            <button id="add-color-btn" title="Click to add a new color and number of stitches">Add Color</button>
             <div id="color-inputs">
                 <!-- Inputs for colors and stitches will be added here -->
+            </div>
+            <div id="stitches-across">
+                <label for="stitches-across-input" title="Enter the number of stitches across your project">Stitches Across:</label>
+                <input type="number" id="stitches-across-input" name="stitches-across" placeholder="Number of stitches">
             </div>
         </aside>
         <main id="live-grid">
@@ -42,6 +46,7 @@
             <div id="grid">
                 <!-- The live grid will be generated here -->
             </div>
+            
         </main>
     </div>
     <footer>
