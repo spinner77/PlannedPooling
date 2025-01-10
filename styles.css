@@ -59,12 +59,43 @@ h1 {
     gap: 2rem;
 }
 
-/* Controls */
+/* Controls Section */
 #controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
     background-color: white;
     padding: 2rem;
     border-radius: 8px;
     box-shadow: var(--shadow-soft);
+    margin-bottom: 2rem;
+}
+
+/* Controls */
+#controls {
+  display: flex;
+  justify-content: space-between; /* Adds space between the two sections */
+  align-items: flex-start; /* Aligns items at the top */
+  gap: 20px; /* Adds space between sections */
+}
+
+#swatch-calculator, #color-inputs-section {
+  flex: 1; /* Ensures both sections take equal width */
+  padding: 20px;
+  border: 1px solid #ccc; /* Optional: Adds a border for clarity */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  background-color: #f9f9f9; /* Optional: Background color for distinction */
+}
+
+@media (max-width: 768px) {
+  #controls {
+      flex-direction: column; /* Stacks sections on smaller screens */
+  }
+
+  #swatch-calculator, #color-inputs-section {
+      flex: unset; /* Resets flex property */
+      width: 100%; /* Makes each section full width */
+  }
 }
 
 #add-color-btn {
@@ -129,6 +160,7 @@ h1 {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: var(--shadow-soft);
+    margin-top: 2rem;
 }
 
 #grid {
@@ -178,6 +210,63 @@ h1 {
     background-color: #c86a51;
 }
 
+/* Swatch Calculator */
+#swatch-calculator {
+    background-color: var(--color-cream);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    height: 100%;
+}
+
+#swatch-calculator h3 {
+    margin-top: 0;
+    color: var(--color-navy);
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-navy);
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#calculation-results {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+#calculation-results p {
+    margin: 0.5rem 0;
+}
+
+/* Color Picker Section */
+#color-picker-section {
+    background-color: var(--color-cream);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+/* Color Picker Container */
+#color-inputs-section {
+    background-color: var(--color-cream);
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: 100%;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     #main-content {
@@ -186,5 +275,14 @@ h1 {
 
     #instructions, #controls, #live-grid {
         margin: 1rem;
+    }
+
+    #controls {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    #container {
+        padding: 1rem;
     }
 }

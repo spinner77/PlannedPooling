@@ -31,28 +31,56 @@
         </p>
     </section>
     <div id="container">
-        <div id="main-content">
-            <aside id="controls">
-                <h2>Controls</h2>
+        <div id="controls">
+            <div id="swatch-calculator">
+                <h3>Swatch Calculator</h3>
+                <p>Create a 10x10 swatch and measure it</p>
+                <div class="input-group">
+                    <label for="hook-size">Hook Size (mm):</label>
+                    <input type="number" id="hook-size" step="0.25" min="2" max="20">
+                </div>
+                <div class="input-group">
+                    <label for="yarn-weight">Yarn Weight:</label>
+                    <select id="yarn-weight">
+                        <option value="lace">Lace (0)</option>
+                        <option value="superfine">Super Fine (1)</option>
+                        <option value="fine">Fine (2)</option>
+                        <option value="light">Light (3)</option>
+                        <option value="medium">Medium/Worsted (4)</option>
+                        <option value="bulky">Bulky (5)</option>
+                        <option value="super-bulky">Super Bulky (6)</option>
+                        <option value="jumbo">Jumbo (7)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="swatch-width">10-Stitch Swatch Width (mm):</label>
+                    <input type="number" id="swatch-width" min="0">
+                </div>
+                <div id="calculation-results">
+                    <p>Single Stitch Width: <span id="stitch-width">-</span> mm</p>
+                    <p>Project Width: <span id="project-width">-</span> mm (<span id="project-width-cm">-</span> cm)</p>
+                </div>
+            </div>
+            <div id="color-inputs-section">
+                <h3>Color Pattern</h3>
                 <button id="add-color-btn" title="Click to add a new color and number of stitches">Add Color</button>
                 <div id="color-inputs">
-                    <!-- Inputs for colors and stitches will be added here -->
+                    <!-- Color inputs will be added here -->
                 </div>
                 <div id="stitches-across">
-                    <label for="stitches-across-input" title="Enter the number of stitches across your project">Stitches Across:</label>
+                    <label for="stitches-across-input">Number of stitches in the row: </label>
                     <input type="number" id="stitches-across-input" name="stitches-across" placeholder="Number of stitches">
                 </div>
-            </aside>
-            <main id="live-grid">
-                <h2>Live Grid</h2>
-                <div id="grid-container">
-                    <div id="grid">
-                        <!-- The live grid will be generated here -->
-                    </div>
-                </div>
-                <button id="save-grid-btn" title="Click to save the grid as an image">Save Grid</button>
-            </main>
+            </div>
         </div>
+    </div>
+        <section id="live-grid">
+            <h2>Live Grid</h2>
+            <div id="grid">
+                <!-- The live grid will be generated here -->
+            </div>
+            <button id="save-grid-btn">Save Grid</button>
+        </section>
     </div>
     <footer>
         <p>&copy; 2025 Spinner77</p>

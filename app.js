@@ -59,6 +59,25 @@ document.getElementById('save-grid-btn').addEventListener('click', function() {
         }, 'image/png');
     });
 });
+function calculateSwatchMeasurements() {
+    const swatchWidth = parseFloat(document.getElementById('swatch-width').value);
+    const stitchesAcross = parseInt(document.getElementById('stitches-across-input').value);
+    
+    if (!swatchWidth || !stitchesAcross) return;
+    
+    const singleStitchWidth = swatchWidth / 10; // Since swatch is 10 stitches
+    const projectWidthMM = singleStitchWidth * stitchesAcross;
+    const projectWidthCM = projectWidthMM / 10;
+    
+    document.getElementById('stitch-width').textContent = singleStitchWidth.toFixed(1);
+    document.getElementById('project-width').textContent = projectWidthMM.toFixed(1);
+    document.getElementById('project-width-cm').textContent = projectWidthCM.toFixed(1);
+}
+
+// Add event listeners for swatch calculator inputs
+['swatch-width', 'swatch-height', 'hook-size', 'yarn-weight'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calculateSwatchMeasurements);
+});
 
 function generateGrid() {
     const gridContainer = document.getElementById('grid');
