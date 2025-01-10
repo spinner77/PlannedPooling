@@ -27,3 +27,83 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
     // Append the new div to the color inputs container
     colorInputsDiv.appendChild(newColorDiv);
 });
+
+document.getElementById('stitches-across-input').addEventListener('input', generateGrid);
+
+function generateGrid() {
+    const gridContainer = document.getElementById('grid');
+    gridContainer.innerHTML = ''; // Clear existing grid
+
+    const stitchesAcross = parseInt(document.getElementById('stitches-across-input').value);
+    if (isNaN(stitchesAcross) || stitchesAcross <= 0) return;
+
+    const colorInputs = document.querySelectorAll('.color-input-group');
+    const colors = [];
+    const stitches = [];
+
+    colorInputs.forEach(group => {
+        const color = group.querySelector('.color-picker').value;
+        const stitchCount = parseInt(group.querySelector('.stitches-input').value);
+        if (color && !isNaN(stitchCount) && stitchCount > 0) {
+            colors.push(color);
+            stitches.push(stitchCount);
+        }
+    });
+
+    if (colors.length === 0 || stitches.length === 0) return;
+
+    const gridHeight = 20;
+    const gridWidth = stitchesAcross;
+    const totalSquares = gridHeight * gridWidth;
+
+    let stitchIndex = 0;
+    let currentStitchCount = 0;
+
+    // Create a 2D array to store the grid squares
+    const gridSquares = Array.from({ length: gridHeight }, () => Array(gridWidth).fill(null));
+
+    for (let row = gridHeight - 1; row >= 0; row--) {
+        if (row % 2 !== 0) {
+            // Left to right
+            for (let col = 0; col < gridWidth; col++) {
+                if (currentStitchCount >= stitches[stitchIndex]) {
+                    stitchIndex = (stitchIndex + 1) % stitches.length;
+                    currentStitchCount = 0;
+                }
+
+                const square = document.createElement('div');
+                square.classList.add('grid-square');
+                square.style.backgroundColor = colors[stitchIndex];
+                gridSquares[row][col] = square;
+
+                currentStitchCount++;
+            }
+        } else {
+            // Right to left
+            for (let col = gridWidth - 1; col >= 0; col--) {
+                if (currentStitchCount >= stitches[stitchIndex]) {
+                    stitchIndex = (stitchIndex + 1) % stitches.length;
+                    currentStitchCount = 0;
+                }
+
+                const square = document.createElement('div');
+                square.classList.add('grid-square');
+                square.style.backgroundColor = colors[stitchIndex];
+                gridSquares[row][col] = square;
+
+                currentStitchCount++;
+            }
+        }
+    }
+
+    // Append the grid squares to the grid container
+    gridSquares.forEach(row => {
+        row.forEach(square => {
+            gridContainer.appendChild(square);
+        });
+    });
+
+    // Set the grid template columns and rows
+    gridContainer.style.gridTemplateColumns = `repeat(${gridWidth}, 20px)`;
+    gridContainer.style.gridTemplateRows = `repeat(${gridHeight}, 20px)`;
+}

@@ -5,3 +5,25 @@
 .color-picker {
     cursor: pointer;
 }
+
+#stitches-across {
+    margin-top: 10px;
+}
+
+#stitches-across-input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+#grid {
+    display: grid;
+    gap: 1px;
+    margin-top: 20px;
+}
+
+.grid-square {
+    width: 20px;
+    height: 20px;
+}
