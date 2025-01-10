@@ -11,46 +11,83 @@
 
 /* Base Styles */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--color-cream);
-    color: var(--color-navy);
-    line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-navy);
+  line-height: 1.6;
 }
 
 /* Header */
 header {
-    background-color: var(--color-navy);
+    background: url('assets/background-875120.jpg') no-repeat center center;
+    background-size: cover;
     color: var(--color-cream);
     padding: 2rem;
     text-align: center;
     box-shadow: var(--shadow-soft);
+    position: relative;
+    font-family: 'Pacifico', cursive;
 }
 
-h1 {
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+    z-index: 1;
+}
+
+header h1 {
+    position: relative;
+    z-index: 2;
     margin: 0;
-    font-size: 2.5rem;
-    font-weight: 300;
+    font-size: 3rem; /* Increase font size */
+    font-weight: 700; /* Increase font weight */
+    text-decoration-color: var(--color-sage); /* Change text decoration color */
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4); /* Brighter gradient text */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: 2px solid var(--color-cream); /* Add border to text */
+    padding: 0.5rem 1rem; /* Add padding to text */
+    border-radius: 8px; /* Add border radius */
 }
 
 /* Instructions */
 #instructions {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: var(--shadow-soft);
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
 }
 
 /* Layout */
 #container {
-    display: flex;
-    flex-direction: column;
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  background: url('assets/neule-888375_1920.png') no-repeat center center;
+  background-size: cover;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Ensure content within the container is readable */
+#container > * {
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
 #main-content {
@@ -100,7 +137,7 @@ h1 {
 
 #add-color-btn {
     cursor: pointer;
-    background-color: var(--color-sage);
+    background: linear-gradient(45deg, var(--color-navy), var(--color-sage));
     color: white;
     border: none;
     padding: 1rem;
@@ -108,6 +145,7 @@ h1 {
     width: 100%;
     font-size: 1rem;
     transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
 }
 
 #add-color-btn:hover {
@@ -134,20 +172,65 @@ h1 {
 
 .stitches-input {
     flex: 1;
-    margin: 0 1rem;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-bottom: 2px solid var(--color-sage);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px 8px 0 0;
+    font-size: 1rem;
+    color: var(--color-navy);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.stitches-input:focus {
+    border-bottom-color: var(--color-terracotta);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stitches-input::placeholder {
+    color: var(--color-navy);
+    opacity: 0.5;
+}
+
+#stitches-across-input {
+    flex: 1;
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-bottom: 2px solid var(--color-sage);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px 8px 0 0;
+    font-size: 1rem;
+    color: var(--color-navy);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#stitches-across-input:focus {
+    border-bottom-color: var(--color-terracotta);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#stitches-across-input::placeholder {
+    color: var(--color-navy);
+    opacity: 0.5;
 }
 
 .remove-color-btn {
     cursor: pointer;
-    background-color: var(--color-error);
+    background: linear-gradient(45deg, var(--color-error), #ff6b6b);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    font-size: 0.9rem;
 }
 
 .remove-color-btn:hover {
@@ -196,12 +279,12 @@ h1 {
 
 #save-grid-btn {
     cursor: pointer;
-    background-color: var(--color-terracotta);
+    background: linear-gradient(45deg, var(--color-sand), var(--color-terracotta));
     color: white;
     border: none;
     padding: 1rem 2rem;
     border-radius: 8px;
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-size: 1rem;
     transition: background-color 0.3s ease;
 }
@@ -285,4 +368,24 @@ h1 {
     #container {
         padding: 1rem;
     }
+}
+
+/* Button Styles */
+button {
+    background: linear-gradient(45deg, var(--color-sage), var(--color-terracotta));
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, var(--color-terracotta), var(--color-sage));
 }
