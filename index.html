@@ -3,18 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Application</title>
+    <title>Planned Pooling</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to My Web Application</h1>
+        <h1>Planned Pooling Generator</h1>
+        <div id="logo-placeholder"> <!-- Space for logo -->
+            <!-- Logo will be added here later -->
+        </div>
     </header>
-    <main>
-        <p>This is the main content area.</p>
-    </main>
+    <section id="instructions">
+        <h2>What is Planned Pooling?</h2>
+        <p>Planned pooling is a crochet technique that transforms variegated yarn into stunning, intentional patterns. Variegated yarn alternates between different colors in repeating sequences, and by carefully aligning the number of stitches with the yarn's color changes, crocheters can create visually striking designs like argyle, stripes, or geometric motifs.
+            <br><br>
+
+            This technique involves:
+            
+            <ul>
+                <li>Choosing the right yarn: Variegated yarn with consistent color repeats works best.</li>
+                <li>Stitch math: Calculating the number of stitches per color segment to achieve the desired pattern.</li>
+                <li>Precision and patience: Adjusting tension and stitch placement to keep the colors pooling predictably.</li>
+                <li>The result is a mesmerizing fabric that looks intricate but is achievable with basic crochet skills and a little planning.</li>
+            </ul>
+        This app allows you to experiment with planned pooling by generating a live grid based on your color and stitch inputs. Have fun exploring different combinations and creating your own unique patterns!
+        </p>
+    </section>
+    <div id="container">
+        <aside id="controls">
+            <h2>Controls</h2>
+            <button id="add-color-btn">Add Color</button>
+            <div id="color-inputs">
+                <!-- Inputs for colors and stitches will be added here -->
+            </div>
+        </aside>
+        <main id="live-grid">
+            <h2>Live Grid</h2>
+            <div id="grid">
+                <!-- The live grid will be generated here -->
+            </div>
+        </main>
+    </div>
     <footer>
-        <p>&copy; 2023 My Web Application</p>
+        <p>&copy; 2025 Spinner77</p>
     </footer>
     <script src="app.js"></script>
 </body>
