@@ -1,7 +1,7 @@
 document.getElementById('add-color-btn').addEventListener('click', function() {
     const colorInputsDiv = document.getElementById('color-inputs');
 
-    // Create a new div to hold the color picker and stitches input
+    // Create a new div to hold the color picker, stitches input, and remove button
     const newColorDiv = document.createElement('div');
     newColorDiv.classList.add('color-input-group');
 
@@ -11,6 +11,7 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
     colorPicker.name = 'color';
     colorPicker.classList.add('color-picker');
     colorPicker.title = 'Select a color';
+    colorPicker.addEventListener('input', generateGrid); // Update grid on color change
 
     // Create the number of stitches input
     const stitchesInput = document.createElement('input');
@@ -19,10 +20,23 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
     stitchesInput.placeholder = 'Number of stitches';
     stitchesInput.classList.add('stitches-input');
     stitchesInput.title = 'Enter the number of stitches for this color';
+    stitchesInput.addEventListener('input', generateGrid); // Update grid on stitches change
 
-    // Append the inputs to the new div
+    // Create the remove button
+    const removeButton = document.createElement('button');
+    removeButton.type = 'button';
+    removeButton.classList.add('remove-color-btn');
+    removeButton.textContent = 'Remove';
+    removeButton.title = 'Remove this color';
+    removeButton.addEventListener('click', function() {
+        newColorDiv.remove();
+        generateGrid(); // Update the grid after removing a color
+    });
+
+    // Append the inputs and remove button to the new div
     newColorDiv.appendChild(colorPicker);
     newColorDiv.appendChild(stitchesInput);
+    newColorDiv.appendChild(removeButton);
 
     // Append the new div to the color inputs container
     colorInputsDiv.appendChild(newColorDiv);
@@ -104,6 +118,6 @@ function generateGrid() {
     });
 
     // Set the grid template columns and rows
-    gridContainer.style.gridTemplateColumns = `repeat(${gridWidth}, 20px)`;
-    gridContainer.style.gridTemplateRows = `repeat(${gridHeight}, 20px)`;
+    gridContainer.style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`;
+    gridContainer.style.gridTemplateRows = `repeat(${gridHeight}, 1fr)`;
 }
