@@ -46,16 +46,17 @@ header h1 {
     position: relative;
     z-index: 2;
     margin: 0;
-    font-size: 3rem; /* Increase font size */
-    font-weight: 700; /* Increase font weight */
-    text-decoration-color: var(--color-sage); /* Change text decoration color */
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4); /* Brighter gradient text */
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    font-weight: 700;
+    
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    border: 2px solid var(--color-cream); /* Add border to text */
-    padding: 0.5rem 1rem; /* Add padding to text */
-    border-radius: 8px; /* Add border radius */
+    border: 2px solid var(--color-cream);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
 }
 
 /* Instructions */
@@ -279,18 +280,22 @@ header h1 {
 
 #save-grid-btn {
     cursor: pointer;
-    background: linear-gradient(45deg, var(--color-sand), var(--color-terracotta));
+    background: linear-gradient(45deg, var(--color-sage), var(--color-terracotta));
     color: white;
     border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    margin-top: 1rem;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
 }
 
 #save-grid-btn:hover {
-    background-color: #c86a51;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, var(--color-terracotta), var(--color-sage));
 }
 
 /* Swatch Calculator */
@@ -348,6 +353,68 @@ header h1 {
     padding: 1.5rem;
     border-radius: 8px;
     height: 100%;
+}
+
+/* Info Sections */
+#info-sections {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    align-items: stretch; /* Ensure equal height */
+}
+
+#instructions, #how-to-use {
+    flex: 1;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
+    height: 200px; /* Reduced height */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#instructions h2, #how-to-use h2 {
+    color: var(--color-navy);
+    margin-top: 0;
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 1rem 0;
+    z-index: 1;
+}
+
+#toggle-info-btn, #toggle-instructions-btn {
+    background: linear-gradient(45deg, var(--color-sage), var(--color-terracotta));
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+#toggle-info-btn:hover, #toggle-instructions-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, var(--color-terracotta), var(--color-sage));
+}
+
+@media (max-width: 768px) {
+    #info-sections {
+        flex-direction: column;
+    }
+
+    #instructions, #how-to-use {
+        height: auto;
+        max-height: 200px;
+    }
 }
 
 /* Responsive Design */

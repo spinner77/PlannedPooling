@@ -101,8 +101,8 @@ document.getElementById('save-grid-btn').addEventListener('click', function() {
     });
 });
 
-// Excel Workbook Export
-document.getElementById('export-excel-btn').addEventListener('click', function() {
+// Export Grid as Excel
+document.getElementById('export-excel-btn').addEventListener('click', function () {
     const colorInputs = document.querySelectorAll('.color-input-group');
     const stitchesAcross = parseInt(document.getElementById('stitches-across-input').value);
 
@@ -129,7 +129,7 @@ document.getElementById('export-excel-btn').addEventListener('click', function()
     }
 
     const rows = [];
-    rows.push(['Row', ...Array.from({ length: stitchesAcross }, (_, i) => `Stitch ${i + 1}`)]);
+    rows.push(['Row', ...Array.from({ length: stitchesAcross }, (_, i) => `${i + 1}`)]);
 
     const gridHeight = 20;
     let stitchIndex = 0;
@@ -151,11 +151,38 @@ document.getElementById('export-excel-btn').addEventListener('click', function()
         rows.push(rowData);
     }
 
+    // Create the worksheet and add the data
     const ws = XLSX.utils.aoa_to_sheet(rows);
+
+    // Set cell styles for the colors
+    for (let R = 1; R < rows.length; R++) {
+        for (let C = 1; C < rows[R].length; C++) {
+            const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
+            if (!ws[cellAddress]) ws[cellAddress] = {};
+            ws[cellAddress].s = {
+                fill: {
+                    patternType: "solid",
+                    fgColor: { rgb: rows[R][C].replace("#", "").toUpperCase() }
+                }
+            };
+        }
+    }
+
+    // Adjust column widths and row heights
+    ws['!cols'] = [{ width: 13.33 }].concat(
+        Array(stitchesAcross).fill({ width: 3.33 })
+    );
+
+    ws['!rows'] = Array(gridHeight + 1).fill({ hpx: 14.29 }); // Set all rows to 0.5cm height (except header)
+
+    // Create the workbook and add the sheet
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Planned Pooling Grid");
+
+    // Export the workbook
     XLSX.writeFile(wb, "planned-pooling-grid.xlsx");
 });
+
 
 // Generate Grid
 function generateGrid() {
