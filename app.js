@@ -58,12 +58,11 @@ document.getElementById('add-color-btn').addEventListener('click', function() {
     colorInputsDiv.appendChild(newColorDiv);
 });
 
+// Calculate the width of the final blanket
 document.getElementById("calculate-width").addEventListener("click", function () {
-    // Get input values
     const swatchWidth = parseFloat(document.getElementById("swatch-width").value);
     const stitchesPerRow = parseInt(document.getElementById("stitches-across-input").value);
 
-    // Validate inputs
     if (isNaN(swatchWidth) || swatchWidth <= 0) {
         alert("Please enter a valid positive number for the swatch width.");
         return;
@@ -73,62 +72,95 @@ document.getElementById("calculate-width").addEventListener("click", function ()
         return;
     }
 
-    // Calculate the final blanket width
-    const singleStitchWidth = swatchWidth / 10; // Width of a single stitch
-    const blanketWidth = singleStitchWidth * stitchesPerRow; // Final blanket width in mm
-    const blanketWidthCm = (blanketWidth / 10).toFixed(2); // Convert to cm
+    const singleStitchWidth = swatchWidth / 10;
+    const blanketWidth = singleStitchWidth * stitchesPerRow;
+    const blanketWidthCm = (blanketWidth / 10).toFixed(2);
 
-    // Display the result
     document.getElementById("blanket-width").textContent = blanketWidth.toFixed(2);
     document.getElementById("blanket-width-cm").textContent = blanketWidthCm;
 });
 
 document.getElementById('stitches-across-input').addEventListener('input', generateGrid);
 
+// Save Grid as Image
 document.getElementById('save-grid-btn').addEventListener('click', function() {
     const gridElement = document.getElementById('grid');
-    
+
     html2canvas(gridElement, {
         backgroundColor: null,
-        scale: 2, // Increase quality
+        scale: 2,
     }).then(canvas => {
-        // Create temporary link element
         const link = document.createElement('a');
         link.download = 'planned-pooling-grid.png';
-        
-        // Convert canvas to blob
+
         canvas.toBlob(function(blob) {
             link.href = URL.createObjectURL(blob);
-            link.click(); // Trigger download
-            
-            // Cleanup
+            link.click();
             URL.revokeObjectURL(link.href);
         }, 'image/png');
     });
 });
-function calculateSwatchMeasurements() {
-    const swatchWidth = parseFloat(document.getElementById('swatch-width').value);
-    const stitchesAcross = parseInt(document.getElementById('stitches-across-input').value);
-    
-    if (!swatchWidth || !stitchesAcross) return;
-    
-    const singleStitchWidth = swatchWidth / 10; // Since swatch is 10 stitches
-    const projectWidthMM = singleStitchWidth * stitchesAcross;
-    const projectWidthCM = projectWidthMM / 10;
-    
-    document.getElementById('stitch-width').textContent = singleStitchWidth.toFixed(1);
-    document.getElementById('project-width').textContent = projectWidthMM.toFixed(1);
-    document.getElementById('project-width-cm').textContent = projectWidthCM.toFixed(1);
-}
 
-// Add event listeners for swatch calculator inputs
-['swatch-width', 'swatch-height', 'hook-size', 'yarn-weight'].forEach(id => {
-    document.getElementById(id).addEventListener('input', calculateSwatchMeasurements);
+// Excel Workbook Export
+document.getElementById('export-excel-btn').addEventListener('click', function() {
+    const colorInputs = document.querySelectorAll('.color-input-group');
+    const stitchesAcross = parseInt(document.getElementById('stitches-across-input').value);
+
+    if (isNaN(stitchesAcross) || stitchesAcross <= 0) {
+        alert("Please enter a valid number of stitches across in the Color Picker section.");
+        return;
+    }
+
+    const colors = [];
+    const stitches = [];
+
+    colorInputs.forEach(group => {
+        const color = group.querySelector('.color-picker').value;
+        const stitchCount = parseInt(group.querySelector('.stitches-input').value);
+        if (color && !isNaN(stitchCount) && stitchCount > 0) {
+            colors.push(color);
+            stitches.push(stitchCount);
+        }
+    });
+
+    if (colors.length === 0 || stitches.length === 0) {
+        alert("Please add colors and their corresponding stitch counts.");
+        return;
+    }
+
+    const rows = [];
+    rows.push(['Row', ...Array.from({ length: stitchesAcross }, (_, i) => `Stitch ${i + 1}`)]);
+
+    const gridHeight = 20;
+    let stitchIndex = 0;
+    let currentStitchCount = 0;
+
+    for (let row = 0; row < gridHeight; row++) {
+        const rowData = [`Row ${row + 1}`];
+
+        for (let col = 0; col < stitchesAcross; col++) {
+            if (currentStitchCount >= stitches[stitchIndex]) {
+                stitchIndex = (stitchIndex + 1) % stitches.length;
+                currentStitchCount = 0;
+            }
+
+            rowData.push(colors[stitchIndex]);
+            currentStitchCount++;
+        }
+
+        rows.push(rowData);
+    }
+
+    const ws = XLSX.utils.aoa_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Planned Pooling Grid");
+    XLSX.writeFile(wb, "planned-pooling-grid.xlsx");
 });
 
+// Generate Grid
 function generateGrid() {
     const gridContainer = document.getElementById('grid');
-    gridContainer.innerHTML = ''; // Clear existing grid
+    gridContainer.innerHTML = '';
 
     const stitchesAcross = parseInt(document.getElementById('stitches-across-input').value);
     if (isNaN(stitchesAcross) || stitchesAcross <= 0) return;
@@ -148,57 +180,27 @@ function generateGrid() {
 
     if (colors.length === 0 || stitches.length === 0) return;
 
-    const gridHeight = 20; // Fixed height
-    const gridWidth = stitchesAcross;
-
+    const gridHeight = 20;
     let stitchIndex = 0;
     let currentStitchCount = 0;
 
-    const gridSquares = Array.from({ length: gridHeight }, () => Array(gridWidth).fill(null));
-
-    // Create a 2D array for the grid squares
     for (let row = gridHeight - 1; row >= 0; row--) {
-        if (row % 2 !== 0) {
-            for (let col = 0; col < gridWidth; col++) {
-                if (currentStitchCount >= stitches[stitchIndex]) {
-                    stitchIndex = (stitchIndex + 1) % stitches.length;
-                    currentStitchCount = 0;
-                }
-
-                const square = document.createElement('div');
-                square.classList.add('grid-square');
-                square.style.backgroundColor = colors[stitchIndex];
-                gridSquares[row][col] = square;
-
-                currentStitchCount++;
+        for (let col = 0; col < stitchesAcross; col++) {
+            if (currentStitchCount >= stitches[stitchIndex]) {
+                stitchIndex = (stitchIndex + 1) % stitches.length;
+                currentStitchCount = 0;
             }
-        } else {
-            for (let col = gridWidth - 1; col >= 0; col--) {
-                if (currentStitchCount >= stitches[stitchIndex]) {
-                    stitchIndex = (stitchIndex + 1) % stitches.length;
-                    currentStitchCount = 0;
-                }
 
-                const square = document.createElement('div');
-                square.classList.add('grid-square');
-                square.style.backgroundColor = colors[stitchIndex];
-                gridSquares[row][col] = square;
+            const square = document.createElement('div');
+            square.classList.add('grid-square');
+            square.style.backgroundColor = colors[stitchIndex];
+            gridContainer.appendChild(square);
 
-                currentStitchCount++;
-            }
+            currentStitchCount++;
         }
     }
 
-    // Append the grid squares to the container
-    gridSquares.forEach(row => {
-        row.forEach(square => {
-            gridContainer.appendChild(square);
-        });
-    });
-
-    // Adjust grid container size based on the number of columns
-    const gridWidthInPixels = Math.min(gridWidth * 20, window.innerWidth - 40); // Limit the max width of the grid
-    gridContainer.style.gridTemplateColumns = `repeat(${gridWidth}, 1fr)`;
-    gridContainer.style.gridTemplateRows = `repeat(${gridHeight}, 1fr)`;
-    gridContainer.style.width = `${gridWidthInPixels}px`; // Adjust grid width dynamically
+    const gridWidthInPixels = Math.min(stitchesAcross * 20, window.innerWidth - 40);
+    gridContainer.style.gridTemplateColumns = `repeat(${stitchesAcross}, 1fr)`;
+    gridContainer.style.width = `${gridWidthInPixels}px`;
 }
