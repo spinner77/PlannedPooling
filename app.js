@@ -1,3 +1,5 @@
+
+
 // Toggle for What is Planned Pooling
 const toggleInfoButton = document.getElementById("toggle-info-btn");
 const infoContent = document.getElementById("info-content");
@@ -231,3 +233,4 @@ function generateGrid() {
     gridContainer.style.gridTemplateColumns = `repeat(${stitchesAcross}, 1fr)`;
     gridContainer.style.width = `${gridWidthInPixels}px`;
 }
+

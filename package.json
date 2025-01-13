@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "exceljs": "^4.4.0",
+    "glob": "^11.0.1",
+    "lru-cache": "^11.0.2",
+    "rimraf": "^6.0.1",
+    "xlsx": "^0.18.5"
+  }
+}
