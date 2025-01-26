@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <header>
@@ -18,7 +16,7 @@
             <!-- Logo will be added here later -->
         </div>
     </header>
-    <div id="info-sections" style="display: flex; gap: 20px;">
+    <div id="info-sections" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
         <!-- Left Section: What is Planned Pooling -->
         <section id="instructions" style="flex: 1;">
             <h2>What is Planned Pooling?</h2>
@@ -88,17 +86,13 @@
             </div>
             <div id="color-inputs-section">
                 <h3>Color Pattern</h3>
-                <div id="stitches-across">
+                <!-- <div id="stitches-across">
                     <label for="stitches-across-input">Number of stitches in the row: </label>
                     <input type="number" id="stitches-across-input" name="stitches-across" placeholder="Number of stitches">
-                </div>
+                </div> -->
                 <button id="add-color-btn" title="Click to add a new color and number of stitches for each color">Add Color</button>
                 <div id="color-inputs">
                     <!-- Color inputs will be added here -->
-                </div>
-                <div id="randomPalette">
-                    <label for="randomPalette">Generate a random color palette:</label>  
-                    <button id="randomPaletteBtn">Get Random Palette</button>
                 </div>
             </div>
         </div>
@@ -109,7 +103,10 @@
                 <!-- The live grid will be generated here -->
             </div>
             <button id="save-grid-btn">Save Grid</button>
-            <button id="export-excel-btn">Export Grid to Excel</button>
+            <div id="stitches-across">
+                <label for="stitches-across-input">Number of stitches in the row: </label>
+                <input type="number" id="stitches-across-input" name="stitches-across" placeholder="Number of stitches">
+            </div>
         </section>
     </div>
     <footer>
